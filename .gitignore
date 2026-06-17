@@ -1,0 +1,5 @@
+# Fichiers à ne jamais pousser sur GitHub
+.env
+credentials.json
+__pycache__/
+data.json
