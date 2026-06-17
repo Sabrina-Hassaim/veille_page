@@ -12,7 +12,7 @@
     "titre": "dbt Mesh : Organiser son projet d'Analytics Engineering à l'échelle",
     "source": "dbt Labs Developer Hub",
     "resume": "Découvrez comment l'architecture d'entreprise de dbt (dbt Mesh) permet de diviser un projet monolithique en sous-projets indépendants mais connectés grâce aux références cross-projets.",
-    "lien": "https://google.com/",
+    "lien": "https://youtube.com/",
     "date": "08 Juin 2026",
     "impact": "Permet aux grandes équipes de collaborer sur des modèles partagés sans goulot d'étranglement ni conflits de fusion.",
     "categorie": "Architecture"
