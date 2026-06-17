@@ -1,0 +1,38 @@
+[
+  {
+    "titre": "L'essor des Data Contracts : Garants de la qualité des données en amont",
+    "source": "Data Engineering Blog",
+    "resume": "Les data contracts redéfinissent la relation entre producteurs et consommateurs de données en formalisant les schémas et SLA sous forme de code. Cet article détaille leur implémentation avec les outils modernes.",
+    "lien": "https://example.com/data-contracts",
+    "date": "12 Juin 2026",
+    "impact": "Réduit les pannes de pipelines de 40% en forçant les équipes de développement à notifier les changements de schéma.",
+    "categorie": "Gouvernance"
+  },
+  {
+    "titre": "dbt Mesh : Organiser son projet d'Analytics Engineering à l'échelle",
+    "source": "dbt Labs Developer Hub",
+    "resume": "Découvrez comment l'architecture d'entreprise de dbt (dbt Mesh) permet de diviser un projet monolithique en sous-projets indépendants mais connectés grâce aux références cross-projets.",
+    "lien": "https://example.com/dbt-mesh",
+    "date": "08 Juin 2026",
+    "impact": "Permet aux grandes équipes de collaborer sur des modèles partagés sans goulot d'étranglement ni conflits de fusion.",
+    "categorie": "Architecture"
+  },
+  {
+    "titre": "Apache Iceberg vs Delta Lake : Le choix du format de table en 2026",
+    "source": "Modern Data Stack Weekly",
+    "resume": "Un comparatif technique approfondi entre les deux géants des formats de table ouverts. Nous analysons les performances, le support communautaire et l'intégration avec les moteurs de requêtes.",
+    "lien": "https://example.com/iceberg-delta",
+    "date": "01 Juin 2026",
+    "impact": "Optimisation des coûts de stockage de 25% et requêtes de lecture 2x plus rapides sur les grands volumes.",
+    "categorie": "Infrastructure"
+  },
+  {
+    "titre": "Le Semantic Layer : Rapprocher la technique des besoins métiers",
+    "source": "Analytics Frontiers",
+    "resume": "Le couche sémantique s'impose comme le pont indispensable entre l'analytics engineering et les outils de BI, centralisant la logique de calcul des métriques au plus près de l'entrepôt.",
+    "lien": "https://example.com/semantic-layer",
+    "date": "28 Mai 2026",
+    "impact": "Garantit une version unique de la vérité pour les indicateurs clés (KPIs), partagée entre dbt, Tableau et Excel.",
+    "categorie": "Business Intelligence"
+  }
+]
