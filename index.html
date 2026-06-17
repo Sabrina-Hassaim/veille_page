@@ -280,6 +280,14 @@
 
     // Initialize the View
     async function init() {
+      // Met à jour la date d'édition dynamiquement au mois/année en cours
+      const dateEl = document.getElementById('edition-date');
+      if (dateEl) {
+        const now = new Date();
+        const formatted = now.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+        dateEl.textContent = `Édition de ${formatted.charAt(0).toUpperCase() + formatted.slice(1)}`;
+      }
+
       // Tente de charger les données dynamiques depuis data.json
       try {
         const response = await fetch('./data.json');

@@ -1,0 +1,61 @@
+name: Monthly Newsletter Sync
+
+on:
+  schedule:
+    # S'exécute le 1er de chaque mois à 00:00 UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # Permet de lancer le workflow manuellement depuis l'interface GitHub Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupération du code source
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configuration de l'environnement Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-run-version: '3.11'
+          cache: 'pip' # Cache pip pour accélérer les futurs lancements
+
+      # 3. Installation des dépendances requises
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
+      # 4. Restauration des secrets d'authentification (si activation de la vraie API Google)
+      # Décommentez ces lignes lorsque vous passerez de la simulation à l'API Google en direct.
+      # Vous devrez ajouter la valeur texte de votre 'token.json' dans un Secret GitHub nommé GOOGLE_TOKEN_JSON.
+      # - name: Restore Google API Token
+      #   run: |
+      #     echo "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
+      #     echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
+
+      # 5. Exécution du script de synchronisation (met à jour data.json)
+      - name: Run sync script
+        run: python sync.py
+
+      # 6. Validation et commit des modifications du fichier data.json
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Vérifie s'il y a des modifications dans data.json
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "[INFO] Aucun nouvel article ou changement détecté dans data.json."
+          else
+            echo "[INFO] Des modifications ont été détectées. Commit et push en cours..."
+            git commit -m "chore: mise à jour mensuelle automatique des articles de veille [skip ci]"
+            git push
+          fi
