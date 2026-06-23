@@ -1,0 +1,197 @@
+[
+{
+"titre": "The dbt Developer Agent is now in Preview",
+"source": "dbt Labs Blog",
+"resume": "Ce nouvel outil d'IA aide les ingénieurs analytics à coder, refactoriser et documenter en comprenant le graphe complet du projet. Il permet d'effectuer des modifications coordonnées en une seule passe, réduisant les erreurs de build et les changements de contexte.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/the-dbt-developer-agent-is-now-in-preview",
+"date": "Mai 2026",
+"impact": "Accélère significativement le développement de modèles en automatisant les tâches répétitives tout en garantissant la cohérence du DAG.",
+"categorie": "AI",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "Ship smarter agents in production with dbt Agent Skills",
+"source": "dbt Labs Blog",
+"resume": "Ces compétences (Agent Skills) encapsulent les meilleures pratiques d'ingénierie analytics, permettant aux agents IA de mieux gérer les tests unitaires et le débogage. Elles fonctionnent comme des connaissances structurées que n'importe quel agent compatible peut charger pour améliorer sa pertinence.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/ship-smarter-agents-in-production-with-dbt-agent-skills",
+"date": "Mai 2026",
+"impact": "Standardise la qualité du code généré par IA en intégrant des connaissances expertes directement dans le flux de travail.",
+"categorie": "Best Practices",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "What's shipped in dbt — May 2026",
+"source": "dbt Labs Blog",
+"resume": "Ce récapitulatif détaille les nouveautés majeures, notamment le support OAuth pour les serveurs MCP et l'API d'administration pour le dépannage. Il inclut également des améliorations sur le BYOK pour Anthropic et OpenAI, offrant plus de flexibilité aux équipes.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/what-s-shipped-in-dbt-may-2026",
+"date": "Mai 2026",
+"impact": "Permet de sécuriser les intégrations IA et de déléguer le dépannage des jobs via des assistants intelligents.",
+"categorie": "DevOps",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "dbt Fusion Is Now Available on Snowflake",
+"source": "Snowflake Blog",
+"resume": "dbt Fusion est désormais disponible sur Snowflake, offrant une compilation plus rapide sans surcharge de migration. Cette mise à jour s'intègre nativement pour améliorer les performances de build sur les projets complexes.",
+"base_domaine": "www snowflake com",
+"chemin_complet": "en/blog/dbt-fusion-available-snowflake/",
+"date": "Mai 2026",
+"impact": "Améliore la vitesse d'itération et réduit le temps de compilation pour les projets dbt volumineux sur Snowflake.",
+"categorie": "Infrastructure",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel technique de Snowflake, fournisseur de cloud data platform."
+},
+{
+"titre": "Ontology in Snowflake: Building Cortex Agents",
+"source": "Snowflake Blog",
+"resume": "Cet article explique comment intégrer des ontologies métiers au sein de Snowflake pour améliorer le raisonnement des agents IA. Il détaille l'utilisation de CTE récursifs pour enrichir le contexte sémantique des agents.",
+"base_domaine": "www snowflake com",
+"chemin_complet": "en/blog/engineering/ontology-grounded-cortex-agents/",
+"date": "Mai 2026",
+"impact": "Permet de créer des agents IA plus précis qui comprennent les hiérarchies complexes et les relations métiers.",
+"categorie": "AI",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel technique de Snowflake, fournisseur de cloud data platform."
+},
+{
+"titre": "Getting started with data lineage",
+"source": "dbt Labs Blog",
+"resume": "Un guide fondamental sur la lignée de données (data lineage) et son rôle crucial dans l'ingénierie analytics moderne. L'article aborde l'utilisation du graphe (DAG) pour le diagnostic des pannes et l'analyse d'impact.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/getting-started-with-data-lineage",
+"date": "Mai 2026",
+"impact": "Renforce la gouvernance et la capacité de diagnostic des pipelines de données pour les équipes analytics.",
+"categorie": "Gouvernance",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "Omni Skills for Cortex Code",
+"source": "Omni Blog",
+"resume": "Présentation de nouvelles compétences pour Cortex Code facilitant le travail des ingénieurs analytics via des workflows automatisés. Les outils permettent de générer des modèles, des jointures et des définitions de métriques directement en branche.",
+"base_domaine": "omni co",
+"chemin_complet": "blog/omni-skills-for-cortex-code",
+"date": "Mai 2026",
+"impact": "Permet une expérience de développement type 'build-as-you-go', réduisant le besoin de context-switching entre terminaux et interfaces BI.",
+"categorie": "BI",
+"score_fiabilite": 4,
+"rationnel_source": "Blog d'entreprise technologique spécialisée dans la BI moderne."
+},
+{
+"titre": "Using Connected Sheets to analyze BigQuery data",
+"source": "Google Cloud Blog",
+"resume": "Exploration des cas d'usage de Connected Sheets pour BigQuery, incluant l'analyse exploratoire en libre-service et le reporting opérationnel. L'article souligne comment combiner des données gouvernées avec des entrées manuelles.",
+"base_domaine": "cloud google com",
+"chemin_complet": "blog/products/data-analytics/using-connected-sheets-to-analyze-bigquery-data",
+"date": "Mai 2026",
+"impact": "Simplifie le reporting métier en permettant aux utilisateurs non-techniques d'interroger directement les données de l'entrepôt.",
+"categorie": "BI",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel de Google Cloud, plateforme cloud majeure."
+},
+{
+"titre": "SAP and Snowflake Unleash a New Era of Enterprise AI with Zero-Copy Integration",
+"source": "Snowflake Blog",
+"resume": "Annonce de l'intégration bidirectionnelle 'zero-copy' entre SAP et Snowflake, facilitant l'unification des données métiers avec les données analytiques. Cela permet de construire des agents IA reposant sur des données SAP fiables sans duplication.",
+"base_domaine": "www snowflake com",
+"chemin_complet": "en/blog/sap-snowflake-zero-copy-integration-enterprise-ai/",
+"date": "Mai 2026",
+"impact": "Facilite l'accès aux données SAP complexes pour les équipes data sans les lourdeurs de l'ETL traditionnel.",
+"categorie": "Infrastructure",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel technique de Snowflake, fournisseur de cloud data platform."
+},
+{
+"titre": "Introducing user-aware calculated columns in Power BI",
+"source": "SQLBI",
+"resume": "Introduction de colonnes calculées conscientes du contexte utilisateur dans Power BI via la propriété Expression Context. Cette technique permet de personnaliser les calculs DAX en fonction de l'utilisateur connecté.",
+"base_domaine": "www sqlbi com",
+"chemin_complet": "articles/introducing-user-aware-calculated-columns-in-power-bi/",
+"date": "Mai 2026",
+"impact": "Offre une granularité de sécurité et de personnalisation accrue pour les rapports Power BI complexes.",
+"categorie": "BI",
+"score_fiabilite": 5,
+"rationnel_source": "Expertise reconnue mondialement dans la communauté Power BI et DAX."
+},
+{
+"titre": "Upgrade to Fusion project by project",
+"source": "dbt Labs Blog",
+"resume": "Nouvelle fonctionnalité permettant aux clients de la plateforme dbt de migrer leurs projets vers Fusion un par un via l'interface utilisateur. Cela élimine la nécessité de tickets de support ou de processus manuels complexes.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/what-s-shipped-in-dbt-may-2026",
+"date": "Mai 2026",
+"impact": "Accélère l'adoption de Fusion, améliorant les performances globales des pipelines sans overhead administratif.",
+"categorie": "DevOps",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "Cortex Code optimization workflow",
+"source": "Snowflake Blog",
+"resume": "Workflow de test et d'optimisation pour les agents IA utilisant Cortex Code. Il détaille l'utilisation de suites d'évaluation pour analyser les patterns d'échec et affiner les instructions de prompt.",
+"base_domaine": "www snowflake com",
+"chemin_complet": "en/blog/engineering/ontology-grounded-cortex-agents/",
+"date": "Mai 2026",
+"impact": "Permet une approche scientifique et itérative pour améliorer la précision des agents IA en production.",
+"categorie": "AI",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel technique de Snowflake, fournisseur de cloud data platform."
+},
+{
+"titre": "dbt Remote MCP Server: Admin API support",
+"source": "dbt Labs Blog",
+"resume": "Le serveur MCP distant supporte désormais les appels API d'administration, permettant aux assistants IA comme Claude ou Cursor de diagnostiquer les erreurs de jobs directement. Cela dépasse la simple génération de requêtes SQL.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/what-s-shipped-in-dbt-may-2026",
+"date": "Mai 2026",
+"impact": "Réduit le temps de résolution des incidents en permettant aux agents d'intervenir directement sur le cycle de vie du job.",
+"categorie": "CI/CD",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+},
+{
+"titre": "Snowflake CLI 3.15.0: Multiversion support",
+"source": "Snowflake Blog",
+"resume": "Snowflake CLI supporte désormais le flag --dbt-version de manière générale (GA), facilitant la gestion de versions multiples pour les projets dbt déployés sur Snowflake.",
+"base_domaine": "www snowflake com",
+"chemin_complet": "en/blog/dbt-fusion-available-snowflake/",
+"date": "Mai 2026",
+"impact": "Simplifie le CI/CD en permettant une gestion de versions dbt plus flexible et stable dans les pipelines automatisés.",
+"categorie": "CI/CD",
+"score_fiabilite": 5,
+"rationnel_source": "Blog officiel technique de Snowflake, fournisseur de cloud data platform."
+},
+{
+"titre": "dbt Copilot BYOK for Anthropic",
+"source": "dbt Labs Blog",
+"resume": "Ajout du support BYOK (bring your own key) pour Anthropic dans dbt Copilot. Cette fonctionnalité permet aux équipes de mieux contrôler les coûts et la conformité des données utilisées par leurs agents.",
+"base_domaine": "www getdbt com",
+"chemin_complet": "blog/what-s-shipped-in-dbt-may-2026",
+"date": "Mai 2026",
+"impact": "Offre aux entreprises la flexibilité nécessaire pour respecter leurs contraintes de sécurité et de conformité liées aux modèles d'IA.",
+"categorie": "Gouvernance",
+"score_fiabilite": 5,
+"rationnel_source": "Source officielle de l'éditeur de l'outil d'analytics engineering standard du marché."
+}
+]
+
+RAPPORT DE VEILLE
+
+Sources de la liste prioritaire pour lesquelles aucun article spécifique de mai 2026 n'a été trouvé ou inclus :
+site:benn.substack.com
+site:seattledataguy.substack.com
+site:dataengineeringweekly.com
+site:moderndatastack.substack.com
+site:learnanalyticsengineering.substack.com
+site:githubnext.com
+site:about.gitlab.com/blog
+site:datageneration.co
+Sources de la liste ayant renvoyé des erreurs ou inaccessibles :
+Aucune source n'a renvoyé d'erreur bloquante ; les informations ont été extraites avec succès à partir des résultats de recherche fournis.
+

@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veille Analytics Engineering - Newsletter</title>
-  
+
   <!-- Tailwind CSS v3 CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Outfit', 'Inter', 'sans-serif'],
+            sans: ['Montserrat', 'Inter', 'sans-serif'],
           },
           colors: {
             brand: {
               50: '#f0f9ff',
               100: '#e0f2fe',
               200: '#bae6fd',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
+              500: '#2BD6D9',
+              600: '#20A8AA',
+              700: '#3D1C69',
+              800: '#3D1C69',
+              900: '#2E1452',
             }
           }
         }
@@ -42,13 +45,16 @@
     ::-webkit-scrollbar {
       width: 8px;
     }
+
     ::-webkit-scrollbar-track {
       background: #f1f5f9;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 4px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
@@ -60,19 +66,23 @@
         color: #0f172a !important;
         font-size: 12pt;
       }
+
       .no-print {
         display: none !important;
       }
+
       .print-header {
         border-bottom: 2px solid #e2e8f0;
         padding-bottom: 1.5rem;
         margin-bottom: 2rem;
       }
+
       .card-grid {
         display: grid !important;
         grid-template-cols: 1fr 1fr !important;
         gap: 1.5rem !important;
       }
+
       .card-item {
         break-inside: avoid !important;
         page-break-inside: avoid !important;
@@ -80,9 +90,11 @@
         border: 1px solid #cbd5e1 !important;
         background: #ffffff !important;
       }
+
       .shadow-custom {
         box-shadow: none !important;
       }
+
       * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -90,30 +102,23 @@
     }
   </style>
 </head>
-<body class="bg-slate-50/50 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white antialiased">
+
+<body
+  class="bg-[#F8FAFC] text-slate-800 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white antialiased">
 
   <!-- Header Banner -->
-  <header class="relative overflow-hidden bg-slate-900 text-white py-12 px-6 sm:px-12 md:py-16 shadow-xl print-header">
-    <!-- Abstract background decorations -->
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-500 rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
-    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full blur-[120px] opacity-25 pointer-events-none"></div>
+  <header
+    class="relative overflow-hidden bg-white text-slate-900 py-12 px-6 sm:px-12 md:py-16 shadow-sm border-b border-slate-200 print-header">
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6 relative z-10">
       <!-- Left: Brand Logo & Title -->
-      <div class="flex items-center gap-4">
-        <!-- Logo Container -->
-        <div class="bg-gradient-to-tr from-brand-500 to-indigo-500 p-2.5 rounded-2xl shadow-lg shadow-brand-500/20 flex items-center justify-center shrink-0">
-          <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/>
-            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
-            <circle cx="12" cy="7" r="1.5" fill="currentColor"/>
-          </svg>
-        </div>
-        <div>
-          <span class="text-xs font-semibold tracking-wider text-brand-400 uppercase">Newsletter Technique</span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+      <div class="flex items-center gap-6">
+        <!-- Logo Converteo Intégré de manière officielle -->
+        <img src="Logos_RVB_Converteo.svg" alt="Logo Converteo" class="h-9 w-auto shrink-0">
+
+        <div class="border-l border-slate-200 pl-6">
+          <span class="text-xs font-bold tracking-wider text-brand-600 uppercase">Newsletter Technique</span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-brand-900">
             Veille Analytics Engineering
           </h1>
         </div>
@@ -121,14 +126,18 @@
 
       <!-- Right: Edition details & PDF Export button -->
       <div class="flex flex-col sm:flex-row sm:items-center gap-4 self-start md:self-auto">
-        <div class="bg-slate-800/80 backdrop-blur-md border border-slate-700/50 px-4 py-2 rounded-xl text-center sm:text-right shadow-inner">
-          <p class="text-xs text-slate-400">ÉDITION MENSUELLE</p>
-          <p class="text-sm font-bold text-slate-100" id="edition-date">Édition de Juin 2026</p>
+        <div class="bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-center sm:text-right shadow-sm">
+          <p class="text-xs font-semibold text-slate-500">ÉDITION MENSUELLE</p>
+          <p class="text-sm font-bold text-slate-800" id="edition-date">Édition de Juin 2026</p>
         </div>
 
-        <button onclick="window.print()" class="no-print inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/20 hover:shadow-brand-600/30 transition-all duration-200 active:scale-95">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 1.258a1.791 1.791 0 01-1.783 2.112H7.9a1.791 1.791 0 01-1.783-2.112L6.34 18m11.318-4.171V8.25m0 0V3.75L18 3.75a2.25 2.25 0 00-2.25-2.25h-7.5A2.25 2.25 0 006 3.75v4.5m0 0V13.83"></path>
+        <button onclick="window.print()"
+          class="no-print inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-900 hover:bg-brand-800 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-900/20 transition-all duration-200 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 1.258a1.791 1.791 0 01-1.783 2.112H7.9a1.791 1.791 0 01-1.783-2.112L6.34 18m11.318-4.171V8.25m0 0V3.75L18 3.75a2.25 2.25 0 00-2.25-2.25h-7.5A2.25 2.25 0 006 3.75v4.5m0 0V13.83">
+            </path>
           </svg>
           Exporter en PDF
         </button>
@@ -138,12 +147,13 @@
 
   <!-- Main Content Area -->
   <main class="flex-grow max-w-7xl w-full mx-auto px-6 sm:px-12 py-10">
-    
+
     <!-- Controls section (no-print) -->
     <section class="no-print mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
       <!-- Category Filter Tabs -->
       <div class="flex flex-wrap gap-2 items-center w-full md:w-auto" id="filters-container">
-        <button onclick="filterArticles('all')" id="filter-all" class="px-4 py-2 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-200 bg-brand-900 text-white border-brand-900 shadow-sm">
+        <button onclick="filterArticles('all')" id="filter-all"
+          class="px-4 py-2 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-200 bg-brand-900 text-white border-brand-900 shadow-sm">
           Tous
         </button>
         <!-- Categories will be generated dynamically here -->
@@ -152,11 +162,14 @@
       <!-- Search Input -->
       <div class="relative w-full md:w-72 shrink-0">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"></path>
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"></path>
           </svg>
         </span>
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Rechercher un article..." class="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all duration-200 shadow-sm">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Rechercher un article..."
+          class="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all duration-200 shadow-sm">
       </div>
     </section>
 
@@ -174,8 +187,11 @@
     <!-- Empty State -->
     <section id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
       <div class="bg-slate-100 p-4 rounded-full text-slate-400 mb-4">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+          </path>
         </svg>
       </div>
       <h3 class="text-base font-semibold text-slate-800">Aucun article trouvé</h3>
@@ -256,21 +272,27 @@
       }
     ];
 
-    // Category styling mapping function (Tailwind badges)
+    // Category styling mapping function (Strictly based on Converteo brand book: image_0a905d.png)
     function getCategoryBadgeStyles(category) {
-      switch (category.toLowerCase()) {
-        case 'gouvernance':
-          return 'bg-purple-50 text-purple-700 border-purple-200';
-        case 'architecture':
-          return 'bg-indigo-50 text-indigo-700 border-indigo-200';
-        case 'infrastructure':
-          return 'bg-amber-50 text-amber-700 border-amber-200';
-        case 'business intelligence':
-          return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-        case 'outils':
-          return 'bg-rose-50 text-rose-700 border-rose-200';
-        default:
-          return 'bg-slate-50 text-slate-700 border-slate-200';
+      const cat = category.toLowerCase();
+      if (cat === 'gouvernance' || cat === 'architecture' || cat === 'stratégie') {
+        // Stratégie Digitale, Marketing & Data: Fond Pastel #EAE8FF / Texte Bleu Électrique #3826BF
+        return 'bg-[#EAE8FF] text-[#3826BF] border-[#3826BF]/20 font-bold';
+      } else if (cat === 'business intelligence' || cat === 'bi' || cat === 'media') {
+        // Métier Media: Fond Pastel Vert #D0F1E5 / Texte Bleu Nuit #2E1452 pour lisibilité optimale
+        return 'bg-[#D0F1E5] text-[#2E1452] border-[#2E1452]/20 font-bold';
+      } else if (cat === 'devops' || cat === 'ci/cd' || cat === 'crm & prm') {
+        // Métier CRM & PRM: Fond Pastel #D0ECED / Texte Vert d'eau #009699
+        return 'bg-[#D0ECED] text-[#009699] border-[#009699]/30 font-bold';
+      } else if (cat === 'analytics' || cat === 'cro' || cat === 'infrastructure') {
+        // Métier Analytics & CRO: Fond Pastel #FCD8D3 / Texte Rouge Vif #FF3125
+        return 'bg-[#FCD8D3] text-[#FF3125] border-[#FF3125]/20 font-bold';
+      } else if (cat === 'outils' || cat === 'technologie') {
+        // Métier Technologie: Fond Pastel #FBEBC4 / Texte Jaune/Ambre foncé #A16207 (contraste web)
+        return 'bg-[#FBEBC4] text-[#A16207] border-[#A16207]/20 font-bold';
+      } else {
+        // Style par défaut: Couleur Perle (#DEDBDE) / Texte Bleu Nuit (#2E1452)
+        return 'bg-[#DEDBDE] text-[#2E1452] border-[#2E1452]/20 font-bold';
       }
     }
 
@@ -290,7 +312,7 @@
 
       // Tente de charger les données dynamiques depuis data.json
       try {
-        const response = await fetch('./data.json');
+        const response = await fetch(`./data.json?v=${new Date().getTime()}`);
         if (response.ok) {
           const freshData = await response.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
@@ -309,23 +331,22 @@
     function renderFilters() {
       const container = document.getElementById('filters-container');
       const categories = ['all', ...new Set(articlesData.map(a => a.categorie))];
-      
+
       // Keep only "all" button template, and recreate the rest
       container.innerHTML = '';
-      
+
       categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.id = `filter-${cat.toLowerCase().replace(/\s+/g, '-')}`;
         btn.onclick = () => filterArticles(cat);
         btn.textContent = cat === 'all' ? 'Tous' : cat;
-        
+
         // Dynamic classes
-        btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-200 ${
-          activeCategory === cat 
-            ? 'bg-slate-900 text-white border-slate-900 shadow-sm' 
-            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-        }`;
-        
+        btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-200 ${activeCategory === cat
+          ? 'bg-brand-900 text-white border-brand-900 shadow-sm'
+          : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+          }`;
+
         container.appendChild(btn);
       });
     }
@@ -347,23 +368,23 @@
     function renderArticles() {
       const grid = document.getElementById('articles-grid');
       const emptyState = document.getElementById('empty-state');
-      
+
       // Filter list
       const filtered = articlesData.filter(article => {
         const matchesCategory = activeCategory === 'all' || article.categorie.toLowerCase() === activeCategory.toLowerCase();
-        const matchesSearch = searchQuery === '' || 
+        const matchesSearch = searchQuery === '' ||
           article.titre.toLowerCase().includes(searchQuery) ||
           article.resume.toLowerCase().includes(searchQuery) ||
           article.source.toLowerCase().includes(searchQuery) ||
           article.categorie.toLowerCase().includes(searchQuery);
-        
+
         return matchesCategory && matchesSearch;
       });
 
       // Update counters
       const countEl = document.getElementById('results-count');
       const readTimeEl = document.getElementById('reading-time-estimate');
-      
+
       if (filtered.length === 0) {
         countEl.textContent = "Aucun article correspondant";
         readTimeEl.textContent = "";
@@ -378,7 +399,7 @@
       emptyState.classList.remove('flex');
 
       countEl.textContent = `${filtered.length} ${filtered.length > 1 ? 'articles sélectionnés' : 'article sélectionné'}`;
-      
+
       // Average 3 mins per article read time
       readTimeEl.innerHTML = `<span class="inline-flex items-center gap-1.5 font-medium text-slate-600">
         <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -405,7 +426,7 @@
               </div>
 
               <!-- Title -->
-              <h3 class="text-lg font-bold text-slate-800 leading-snug group-hover:text-brand-600 transition-colors duration-200 mb-2">
+              <h3 class="text-lg font-bold text-slate-800 leading-snug group-hover:text-brand-900 transition-colors duration-200 mb-2">
                 ${article.titre}
               </h3>
               
@@ -424,7 +445,7 @@
             <!-- Footer: Impact & Button -->
             <div class="mt-4 pt-4 border-t border-slate-100/80">
               <!-- Impact -->
-              <div class="italic text-xs text-brand-700 bg-brand-50/50 border border-brand-100/60 p-3 rounded-xl mb-4 leading-normal flex items-start gap-2">
+              <div class="italic text-xs text-brand-900 bg-slate-50 border border-slate-100 p-3 rounded-xl mb-4 leading-normal flex items-start gap-2">
                 <svg class="w-4 h-4 text-brand-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                 </svg>
@@ -453,4 +474,5 @@
   </script>
 
 </body>
+
 </html>
