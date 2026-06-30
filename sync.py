@@ -1,18 +1,22 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import os
 import re
 import json
 import sys
-
+import urllib.request
+import urllib.error
+import ssl
 
 def get_mandatory_keys():
     """
     Lit dynamiquement les clés obligatoires depuis 'contexte.md'.
-    En cas de problème, utilise le schéma par défaut.
+    En cas de problème, utilise le schéma bilingue par défaut.
     """
-    default_keys = ['titre', 'source', 'resume', 'lien', 'date', 'impact', 'categorie']
+    default_keys = [
+        'titre_en', 'titre_fr', 'source', 'resume_fr', 'resume_en', 
+        'lien', 'date', 'impact_fr', 'impact_en', 'categorie', 'stack',
+        'score_fiabilite', 'rationnel_source'
+    ]
     contexte_path = 'contexte.md'
 
     if not os.path.exists(contexte_path):
@@ -73,61 +77,115 @@ def extract_json_array(raw_text):
         snippet = json_str[start_err:end_err]
         raise ValueError(
             f"Structure JSON invalide : {e.msg} (position {e.pos}).\n"
-            f"    Aperçu de la zone d'erreur : ... {repr(snippet)} ..."
+            f"     Aperçu de la zone d'erreur : ... {repr(snippet)} ..."
         )
+
+
+def check_if_url_exists(url):
+    """
+    Fait une requête HTTP pour vérifier l'existence du lien réel.
+    Gère les blocages TLS, les redirections, les certificats SSL non valides,
+    et les codes HTTP comme 403/401/405/429 qui prouvent que le lien existe mais est protégé.
+    """
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3'
+    }
+    
+    # Ignorer les problèmes de certificats locaux SSL courants en Python
+    try:
+        context = ssl._create_unverified_context()
+    except AttributeError:
+        context = None
+
+    # 1. Tentative rapide via requête HEAD
+    try:
+        req = urllib.request.Request(url, method='HEAD', headers=headers)
+        with urllib.request.urlopen(req, timeout=5, context=context) as response:
+            if response.status in [200, 301, 302, 307, 308]:
+                return True
+    except urllib.error.HTTPError as e:
+        # Si le serveur renvoie un code de restriction d'accès (401, 403, 405, 429),
+        # l'URL existe bel et bien sur la plateforme (ce n'est pas une hallucination 404).
+        if e.code in [401, 403, 405, 429]:
+            return True
+        if e.code == 404:
+            return False
+    except Exception:
+        pass
+        
+    # 2. Repli de sécurité via requête GET (lecture partielle)
+    try:
+        req_get = urllib.request.Request(url, method='GET', headers=headers)
+        with urllib.request.urlopen(req_get, timeout=5, context=context) as response:
+            if response.status in [200, 301, 302, 307, 308]:
+                return True
+    except urllib.error.HTTPError as e:
+        if e.code in [401, 403, 405, 429]:
+            return True
+        if e.code == 404:
+            return False
+    except Exception:
+        return False
+
+    return False
 
 
 def rebuild_links_from_split_data(articles):
     """
-    Prend le JSON fragmenté (base_domaine et chemin_complet), reconstruit
-    l'URL réelle dans la clé 'lien' et supprime les clés de transition.
+    Reconstruit l'URL à partir de base_domaine et chemin_complet,
+    vérifie si elle est valide, injecte le lien propre et nettoie les résidus.
     """
     rebuilt_articles = []
     
-    for idx, item in enumerate(articles):
+    for item in articles:
         if not isinstance(item, dict):
             continue
             
         base_domaine = item.get("base_domaine", "").strip()
         chemin_complet = item.get("chemin_complet", "").strip("/")
         
-        # Si l'agent a bien renvoyé les clés de découpage
+        # FIX : Récupération bilingue du titre pour éviter "Article sans titre" dans les logs de la console
+        title_preview = item.get('titre_fr', item.get('titre_en', 'Article sans titre'))
+        
         if base_domaine and chemin_complet:
-            # 1. On remplace les espaces par des points
             domaine_propre = base_domaine.replace(" ", ".")
-            # 2. On assemble l'URL finale propre
-            item["lien"] = f"https://{domaine_propre}/{chemin_complet}"
+            url_reconstruite = f"https://{domaine_propre}/{chemin_complet}"
+            
+            print(f"[+] Analyse Web : Vérification de -> {url_reconstruite}")
+            
+            if check_if_url_exists(url_reconstruite):
+                item["lien"] = url_reconstruite
+                # Retrait des clés temporaires de contournement de censure
+                item.pop("base_domaine", None)
+                item.pop("chemin_complet", None)
+                rebuilt_articles.append(item)
+            else:
+                print(f"[🚨 INTERCEPTION] Hallucination détectée ou lien mort (404). Article supprimé : '{title_preview}'")
         else:
-            # Sécurité si les clés sont absentes mais que 'lien' n'existe pas encore
-            if "lien" not in item:
-                item["lien"] = "https://www.google.com"
+            print(f"[⚠️ DONNÉE INCOMPLÈTE] Impossible de reconstituer le lien pour : '{title_preview}'")
                 
-        # Nettoyage des clés temporaires utilisées pour contourner la censure
-        item.pop("base_domaine", None)
-        item.pop("chemin_complet", None)
-        
-        rebuilt_articles.append(item)
-        
     return rebuilt_articles
 
 
 def validate_json_data(data, mandatory_keys):
     """
-    Valide le format et s'assure de la présence et du contenu de chaque clé requise.
+    Valide le schéma final des données par rapport aux exigences de contexte.md.
     """
     if not isinstance(data, list):
         raise ValueError("Le JSON extrait doit être sous forme de tableau (liste).")
 
     if not data:
-        raise ValueError("Le tableau JSON extrait est vide.")
+        raise ValueError("Le tableau JSON extrait est vide après filtrage des liens morts.")
 
     for idx, item in enumerate(data):
         if not isinstance(item, dict):
             raise ValueError(f"L'élément à l'index {idx} n'est pas un dictionnaire d'article valide.")
 
-        title_preview = item.get('titre', f"Article #{idx + 1}")
+        # FIX : Récupération bilingue du titre lors des messages d'erreur de validation
+        title_preview = item.get('titre_fr', item.get('titre_en', f"Article #{idx + 1}"))
 
-        # Validation de chaque clé obligatoire (le 'lien' reconstruit en fait partie)
         for key in mandatory_keys:
             if key not in item:
                 raise ValueError(
@@ -149,7 +207,7 @@ def validate_json_data(data, mandatory_keys):
 
 def save_data(data):
     """
-    Sauvegarde le tableau d'articles propre dans data.json à la racine.
+    Sauvegarde le tableau final d'articles dans data.json.
     """
     output_path = 'data.json'
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -158,67 +216,47 @@ def save_data(data):
 
 def main():
     print("=========================================================")
-    print("       WORKFLOW DE SYNCHRONISATION VEILLE TECHNIQUE      ")
+    print("        WORKFLOW DE SYNCHRONISATION VEILLE TECHNIQUE      ")
     print("=========================================================\n")
 
     input_file_path = 'test veille.txt'
-    
-    # 1. Chargement des clés obligatoires
     mandatory_keys = get_mandatory_keys()
 
-    # 2. Lecture du fichier d'entrée 
-    print(f"[+] Lecture du fichier source : '{input_file_path}'...")
+    print(f"[+] Lecture du fichier source brut : '{input_file_path}'...")
     if not os.path.exists(input_file_path):
-        print(f"\n[ERREUR CHITRIQUE] Le fichier '{input_file_path}' est introuvable.")
-        print("Vérifie qu'il est bien orthographié et placé dans le même dossier que ce script.")
+        print(f"\n[❌ ERREUR CRITIQUE] Le fichier '{input_file_path}' est introuvable.")
         sys.exit(1)
         
     try:
         with open(input_file_path, 'r', encoding='utf-8') as f:
             raw_document = f.read()
-    except UnicodeDecodeError:
-        print(f"\n[ERREUR] Impossible de lire '{input_file_path}' en texte brut.")
-        print("Si c'est un vrai fichier Microsoft Word binaire, réenregistre-le en .txt d'abord.")
-        sys.exit(1)
     except Exception as e:
-        print(f"\n[ERREUR] Échec de la lecture du fichier : {e}")
+        print(f"\n[❌ ERREUR] Échec de la lecture du fichier : {e}")
         sys.exit(1)
 
-    # 3. Traitement, extraction, reconstruction et validation
     try:
         print("[+] Isolation et extraction du bloc JSON...")
         extracted_json = extract_json_array(raw_document)
 
-        print("[+] Reconstruction des URLs complètes (Fusion Domaine + Chemin)...")
+        print("[+] Ingestion et validation HTTP (Anti-Hallucination)...")
         clean_json = rebuild_links_from_split_data(extracted_json)
 
-        print("[+] Validation du schéma final des données...")
+        print("[+] Validation finale de l'intégrité du schéma...")
         validate_json_data(clean_json, mandatory_keys)
 
-        # 4. Enregistrement local
         save_data(clean_json)
         
-        # 5. Récapitulatif de réussite
         article_count = len(clean_json)
         print("\n" + "=" * 57)
-        print(f"[SUCCESS] {article_count} articles traités et importés dans data.json !")
+        print(f"[SUCCESS] {article_count} articles certifiés et importés dans data.json !")
         print("=" * 57 + "\n")
 
     except ValueError as val_err:
         print("\n" + "#" * 65)
-        print(" [ERREUR] LA SYNCHRONISATION A ÉCHOUÉ (DONNÉES INVALIDES)")
+        print(" [ERREUR] LA SYNCHRONISATION A ÉCHOUÉ (DONNÉES BLOQUÉES)")
         print("#" * 65)
         print(f"Détail technique : {val_err}")
-        print("\n--> SÉCURITÉ : Le fichier 'data.json' actuel N'A PAS été écrasé.")
-        print("#" * 65 + "\n")
-        sys.exit(1)
-
-    except Exception as e:
-        print("\n" + "#" * 65)
-        print(" [ERREUR] ERREUR TECHNIQUE INATTENDUE DURANT LA CONVERSION")
-        print("#" * 65)
-        print(f"Détail : {e}")
-        print("\n--> SÉCURITÉ : Le fichier 'data.json' actuel N'A PAS été écrasé.")
+        print("\n--> SÉCURITÉ : Le fichier 'data.json' d'origine N'A PAS été écrasé.")
         print("#" * 65 + "\n")
         sys.exit(1)
 
