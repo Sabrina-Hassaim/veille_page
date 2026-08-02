@@ -15,19 +15,19 @@
     "lien": "https://peliqan.io/blog/dbt-alternatives-competitors"
   },
   {
-    "titre_en": "How Snowflake's Marketing AI Council Helped Turn a Global Org into an AI-Native Team",
-    "titre_fr": "Comment le Conseil IA Marketing de Snowflake a transformé une organisation mondiale en une équipe native-IA",
+    "titre_en": "CoCoEvolve: What If a Coding Agent Could Optimize Your AI Systems?",
+    "titre_fr": "CoCoEvolve : Et si un agent de codage pouvait optimiser vos systèmes d'IA ?",
     "source": "Snowflake",
-    "resume_fr": "Cet article décrit comment Snowflake a structuré un conseil interne pour gouverner et accélérer l'adoption de l'IA à travers ses équipes marketing. Il met en lumière les cadres de travail nécessaires pour opérationnaliser l'IA à grande échelle.",
-    "resume_en": "This article describes how Snowflake structured an internal council to govern and accelerate AI adoption across its marketing teams. It highlights the frameworks needed to operationalize AI at scale.",
-    "date": "22/06/2026",
-    "impact_fr": "Offre un modèle organisationnel pour les responsables data souhaitant instaurer une gouvernance et une culture IA au sein de leur entreprise.",
-    "impact_en": "Offers an organizational model for data leaders wishing to establish AI governance and culture within their enterprise.",
-    "categorie": "Gouvernance",
+    "resume_fr": "Snowflake présente CoCoEvolve, un système capable d'optimiser automatiquement les configurations d'agents d'IA sans intervention humaine. Les résultats montrent une amélioration significative des performances sur les benchmarks de type DABStep.",
+    "resume_en": "Snowflake introduces CoCoEvolve, a system capable of automatically optimizing AI agent configurations without human intervention. Results show significant performance improvement on DABStep benchmarks.",
+    "date": "03/06/2026",
+    "impact_fr": "Introduit des techniques d'optimisation automatisée pour les agents IA en production, réduisant le besoin de réglage manuel.",
+    "impact_en": "Introduces automated optimization techniques for AI agents in production, reducing the need for manual tuning.",
+    "categorie": "AI",
     "stack": "Snowflake",
     "score_fiabilite": 5,
-    "rationnel_source": "Retour d'expérience concret sur la transformation organisationnelle.",
-    "lien": "https://snowflake.com/en/blog/snowflake-marketing-ai-council-ai-native-team"
+    "rationnel_source": "Article technique émanant directement des équipes de recherche Snowflake AI.",
+    "lien": "https://snowflake.com/en/blog/engineering/optimize-snowflake-ai-systems-cocoevolve"
   },
   {
     "titre_en": "Security Cost in Power BI and Analysis Services Tabular",
