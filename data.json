@@ -28,20 +28,5 @@
     "score_fiabilite": 5,
     "rationnel_source": "Blog d'ingénierie technique approfondie.",
     "lien": "https://snowflake.com/en/blog/engineering/optimize-snowflake-ai-systems-cocoevolve"
-  },
-  {
-    "titre_en": "Adaptive Compute: Now GA Across Select AWS, Azure and Google Cloud Regions",
-    "titre_fr": "Adaptive Compute : Généralement disponible sur certaines régions AWS, Azure et Google Cloud",
-    "source": "Snowflake Blog",
-    "resume_fr": "Adaptive Compute ajuste automatiquement les ressources de calcul pour répondre aux fluctuations imprévisibles des charges de travail. Cette fonctionnalité améliore le rapport prix-performance et réduit le besoin de maintenance manuelle.",
-    "resume_en": "Adaptive Compute automatically adjusts compute resources to meet unpredictable workload fluctuations. This feature improves price-performance and reduces the need for manual maintenance.",
-    "date": "01/07/2026",
-    "impact_fr": "Optimisation automatisée des coûts et des performances pour les workloads variables en multi-cloud.",
-    "impact_en": "Automated cost and performance optimization for variable multi-cloud workloads.",
-    "categorie": "Infrastructure",
-    "stack": "Multi-Stack",
-    "score_fiabilite": 5,
-    "rationnel_source": "Annonce officielle de produit avec des détails d'ingénierie.",
-    "lien": "https://snowflake.com/en/blog/adaptive-compute-ga-azure-google-cloud"
   }
 ]
