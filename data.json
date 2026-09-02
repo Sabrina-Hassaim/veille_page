@@ -15,6 +15,21 @@
     "lien": "https://snowflake.com/en/blog/enterprise-ai-agents-grounded-context"
   },
   {
+    "titre_en": "CoCoEvolve: Evolutionary Optimization for AI Systems",
+    "titre_fr": "CoCoEvolve : Optimisation évolutionnaire pour les systèmes IA",
+    "source": "Snowflake Blog",
+    "resume_fr": "CoCoEvolve utilise des techniques d'optimisation évolutionnaire combinées à un agent de codage pour améliorer automatiquement les performances des systèmes IA. Cette approche surpasse les méthodes basées uniquement sur des LLM en permettant des tests itératifs et des ajustements autonomes.",
+    "resume_en": "CoCoEvolve employs evolutionary optimization techniques combined with a coding agent to automatically improve AI system performance. This approach outperforms LLM-only methods by enabling iterative testing and autonomous adjustments.",
+    "date": "01/07/2026",
+    "impact_fr": "Réduction significative de l'effort de tuning manuel des pipelines d'IA et amélioration de la précision des modèles.",
+    "impact_en": "Significant reduction in manual AI pipeline tuning effort and improved model accuracy.",
+    "categorie": "AI",
+    "stack": "Snowflake",
+    "score_fiabilite": 5,
+    "rationnel_source": "Blog d'ingénierie technique approfondie.",
+    "lien": "https://snowflake.com/en/blog/engineering/optimize-snowflake-ai-systems-cocoevolve"
+  },
+  {
     "titre_en": "Adaptive Compute: Now GA Across Select AWS, Azure and Google Cloud Regions",
     "titre_fr": "Adaptive Compute : Généralement disponible sur certaines régions AWS, Azure et Google Cloud",
     "source": "Snowflake Blog",
