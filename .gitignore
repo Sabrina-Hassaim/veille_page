@@ -1,4 +1,5 @@
 # Fichiers à ne jamais pousser sur GitHub
 .env
 credentials.json
+token.json
 __pycache__/

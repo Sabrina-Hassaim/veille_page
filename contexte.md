@@ -2,9 +2,11 @@
 
 Cette newsletter mensuelle est destinée à nos clients pour leur présenter les dernières avancées et bonnes pratiques en Analytics Engineering.
 
+Le contenu est généré par Gemini (recherche Google), validé par `sync.py`, puis affiché par `index.html`.
+
 ## Schéma des Données
 
-Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par le script de synchronisation `sync.py` pour valider les données extraites du Google Doc avant de mettre à jour le fichier `data.json`.
+Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par le script de synchronisation `sync.py` pour valider les données extraites de `test veille.txt` avant de mettre à jour le fichier `data.json`.
 
 ### Clés Obligatoires
 - `titre_en` : Le titre de l'article dans sa version originale en anglais.
@@ -21,14 +23,17 @@ Chaque article doit posséder les clés obligatoires suivantes. Elles sont utili
 - `score_fiabilite` : Une note entière de 1 à 5 mesurant la qualité technique et l'autorité de la source d'origine.
 - `rationnel_source` : Une courte phrase en français expliquant le score de fiabilité attribué.
 
-## Fonctionnement du Workflow de Synchronisation
+## Pipeline
 
-Le script `sync.py` permet d'automatiser la mise à jour des articles :
-1. Recherche du dernier Google Doc contenant "test veille" dans le titre.
-2. Téléchargement du contenu sous format texte brut.
-3. Extraction du tableau JSON délimité par `[` et `]`.
-4. Reconstruction des URLs réelles (fusion de base_domaine et chemin_complet) et validation par ping HTTP (HEAD) en temps réel pour éliminer automatiquement les liens morts et les hallucinations de l'IA.
-5. Validation par rapport aux clés obligatoires bilingues et techniques listées ci-dessus, puis sauvegarde dans le fichier `data.json` si les données sont valides.
+1. `generate.py` charge `prompts/veille.md`, injecte la date du jour, appelle Gemini avec Google Search.
+2. La PARTIE 1 (JSON avec `base_domaine` + `chemin_complet`) est écrite dans `test veille.txt`.
+3. La PARTIE 2 (audit des sources) est écrite dans `rapport-veille.md`.
+4. `sync.py` reconstruit les URLs (`https://` + domaine + chemin), ping HTTP, élimine les liens morts / hallucinations.
+5. Si le schéma bilingue est valide, `data.json` est mis à jour. Sinon il n'est pas écrasé.
+6. GitHub Actions commit `data.json` le 1er de chaque mois (ou via lancement manuel).
 
-### Configuration Google API
-### Pour exécuter le script, placez votre fichier `credentials.json` (téléchargé depuis la console Google Cloud avec l'API Google Drive activée) à la racine de ce dossier. Au premier lancement, une fenêtre s'ouvrira pour vous authentifier et créer le fichier `token.json` requis pour les lancements futurs en tâche de fond.
+## Configuration
+
+- Secret GitHub / variable locale : `GEMINI_API_KEY` (jamais commitée).
+- Dépendance Python : voir `requirements.txt` (`google-genai`).
+- `sync.py` n'a besoin d'aucune clé.
