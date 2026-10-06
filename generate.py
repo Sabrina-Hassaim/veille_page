@@ -95,6 +95,46 @@ def call_gemini(prompt: str) -> str:
     return text
 
 
+def remove_trailing_commas(json_str: str) -> str:
+    """Retire les virgules placées juste avant } ou ], hors des chaînes de caractères."""
+    result = []
+    in_string = False
+    escaped = False
+    pending_comma = None
+
+    for char in json_str:
+        if in_string:
+            result.append(char)
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if pending_comma is not None:
+            if char.isspace():
+                pending_comma.append(char)
+                continue
+            if char not in "}]":
+                result.append(",")
+            result.extend(pending_comma)
+            pending_comma = None
+
+        if char == ",":
+            pending_comma = []
+        else:
+            result.append(char)
+            if char == '"':
+                in_string = True
+
+    if pending_comma is not None:
+        result.append(",")
+        result.extend(pending_comma)
+    return "".join(result)
+
+
 def extract_json_part(raw: str) -> list:
     """Isole le tableau JSON de la PARTIE 1 (marqueurs, sinon premier [ … dernier ])."""
     marker_start = raw.find("---JSON-START---")
@@ -104,12 +144,6 @@ def extract_json_part(raw: str) -> list:
 
     cleaned = re.sub(r"```json\s*", "", raw, flags=re.IGNORECASE)
     cleaned = re.sub(r"```\s*", "", cleaned)
-    cleaned = (
-        cleaned.replace("“", '"')
-        .replace("”", '"')
-        .replace("‘", '"')
-        .replace("’", '"')
-    )
 
     start = cleaned.find("[")
     end = cleaned.rfind("]") + 1
@@ -117,13 +151,19 @@ def extract_json_part(raw: str) -> list:
         raise ValueError("PARTIE 1 : aucun tableau JSON trouvé dans la réponse.")
 
     json_str = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", cleaned[start:end])
+    json_str = remove_trailing_commas(json_str)
     try:
         data = json.loads(json_str)
-    except json.JSONDecodeError as error:
-        snippet = json_str[max(0, error.pos - 40): error.pos + 40]
-        raise ValueError(
-            f"JSON invalide : {error.msg} (position {error.pos}). Aperçu : {snippet!r}"
-        ) from error
+    except json.JSONDecodeError:
+        # Gemini met parfois des guillemets typographiques comme délimiteurs JSON.
+        # Les apostrophes ’ restent intactes : elles apparaissent dans le texte français.
+        try:
+            data = json.loads(json_str.replace("“", '"').replace("”", '"'))
+        except json.JSONDecodeError as error:
+            snippet = json_str[max(0, error.pos - 40): error.pos + 40]
+            raise ValueError(
+                f"JSON invalide : {error.msg} (position {error.pos}). Aperçu : {snippet!r}"
+            ) from error
 
     if not isinstance(data, list):
         raise ValueError("La PARTIE 1 doit être un tableau d'articles.")
