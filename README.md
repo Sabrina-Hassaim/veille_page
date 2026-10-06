@@ -1,6 +1,6 @@
 # Veille Analytics Engineering
 
-Newsletter mensuelle Converteo. La page lit `data.json` et l'affiche sur GitHub Pages.
+Newsletter mensuelle Converteo. La page lit `data/data.json` et l'affiche sur GitHub Pages.
 
 https://sabrina-hassaim.github.io/veille_page/
 
@@ -8,12 +8,14 @@ https://sabrina-hassaim.github.io/veille_page/
 
 ```text
 prompts/veille.md
-    → generate.py (Gemini + Google Search) → veille.json
-    → sync.py (liens vérifiés) → data.json
+    → pipeline/generate.py (Gemini + Google Search) → data/veille.json
+    → pipeline/sync.py (liens vérifiés) → data/data.json
     → index.html
 ```
 
-`veille.json` est un fichier de travail. Il n'est pas versionné. `data.json` et `rapport-veille.md` le sont.
+`data/veille.json` est un fichier de travail. Il n'est pas versionné. `data/data.json` et `data/rapport-veille.md` le sont.
+
+Les commandes se lancent depuis la racine du dépôt.
 
 ## Lancement
 
@@ -23,14 +25,12 @@ Manuel : Actions → Monthly Newsletter Sync → Run workflow → branche `main`
 
 Secret requis : `GEMINI_API_KEY`.
 
-## Fichiers utiles
+## Dossiers
 
-| Fichier | Rôle |
+| Dossier | Rôle |
 |---|---|
-| `prompts/veille.md` | Prompt de recherche et de rédaction |
-| `generate.py` | Appel Gemini |
-| `sync.py` | Validation des URLs et du schéma |
-| `data.json` | Articles publiés |
-| `rapport-veille.md` | Sources sans article ce mois-là |
-| `contexte.md` | Clés obligatoires lues par `sync.py` |
-| `index.html` | Page |
+| `assets/` | Logo et médias |
+| `data/` | Articles publiés et audit des sources |
+| `prompts/` | Prompt Gemini et clés obligatoires |
+| `pipeline/` | `generate.py` et `sync.py` |
+| `index.html` | Page, à la racine pour GitHub Pages |

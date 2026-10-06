@@ -2,5 +2,5 @@
 .env
 credentials.json
 token.json
-veille.json
+data/veille.json
 __pycache__/

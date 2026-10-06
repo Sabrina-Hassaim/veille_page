@@ -29,19 +29,19 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate veille with Gemini
-        run: python generate.py
+        run: python pipeline/generate.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Validate URLs and schema
-        run: python sync.py
+        run: python pipeline/sync.py
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add -f data.json rapport-veille.md
+          git add -f data/data.json data/rapport-veille.md
           if git diff --cached --quiet; then
             echo "[INFO] Aucun changement à publier."
           else
