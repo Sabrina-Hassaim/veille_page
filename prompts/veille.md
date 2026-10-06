@@ -35,7 +35,7 @@ Respecte strictement ce schéma :
 "resume_fr": "[Résumé ultra-concis de exactement 2 phrases en français décrivant le contenu technique]",
 "resume_en": "[Traduction fidèle du résumé en anglais]",
 "base_domaine": "[UNIQUEMENT le domaine principal sans aucun slash ni dossier, en remplaçant les points par des espaces. Exemple obligatoire pour Google Cloud: 'cloud google com' (n'inclus JAMAIS 'blog' ici)]",
-"chemin_complet": "[TOUT le reste de l'URL qui vient après l'extension du domaine, incluant obligatoirement les répertoires racines comme 'blog/'. Exemple crucial pour Google Cloud: 'blog/products/identity-security/nom-article'. Ne commence jamais par un slash. N'invente rien. N'essaye pas de compléter l'URL par toi même]",
+"chemin_complet": "[Copie EXACTE du chemin de l'URL trouvée par la recherche, après le domaine. Inclus les dossiers réels comme 'blog/'. Ne commence jamais par un slash. N'invente pas de dossier de date. N'ajoute pas de mots absents de l'URL (announcing, on, a, to, by). N'essaye pas de reconstruire le chemin à partir du titre.]",
 "date": "[Date de publication au format strict JJ/MM/AAAA]",
 "impact_fr": "[Explication en français de l'impact opérationnel direct pour un Analytics Engineer]",
 "impact_en": "[Traduction fidèle et précise de l'impact en anglais]",
