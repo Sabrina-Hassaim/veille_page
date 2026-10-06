@@ -4,7 +4,7 @@ Cette newsletter mensuelle est destinée à nos clients pour leur présenter les
 
 ## Schéma des Données
 
-Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par le script de synchronisation `sync.py` pour valider les données extraites du Google Doc avant de mettre à jour le fichier `data.json`.
+Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par `sync.py` pour valider les données de `veille.json` avant de mettre à jour `data.json`.
 
 ### Clés Obligatoires
 - `titre_en` : Le titre de l'article dans sa version originale en anglais.
@@ -21,14 +21,11 @@ Chaque article doit posséder les clés obligatoires suivantes. Elles sont utili
 - `score_fiabilite` : Une note entière de 1 à 5 mesurant la qualité technique et l'autorité de la source d'origine.
 - `rationnel_source` : Une courte phrase en français expliquant le score de fiabilité attribué.
 
-## Fonctionnement du Workflow de Synchronisation
+## Pipeline
 
-Le script `sync.py` permet d'automatiser la mise à jour des articles :
-1. Recherche du dernier Google Doc contenant "test veille" dans le titre.
-2. Téléchargement du contenu sous format texte brut.
-3. Extraction du tableau JSON délimité par `[` et `]`.
-4. Reconstruction des URLs réelles (fusion de base_domaine et chemin_complet) et validation par ping HTTP (HEAD) en temps réel pour éliminer automatiquement les liens morts et les hallucinations de l'IA.
-5. Validation par rapport aux clés obligatoires bilingues et techniques listées ci-dessus, puis sauvegarde dans le fichier `data.json` si les données sont valides.
+1. `generate.py` lit `prompts/veille.md`, appelle Gemini avec Google Search, et écrit `veille.json`.
+2. `sync.py` reconstruit les URLs, vérifie qu'elles répondent, puis écrit `data.json` si le schéma est valide.
+3. `index.html` affiche `data.json`.
+4. GitHub Actions enchaîne ces étapes le 1er du mois, puis GitHub Pages publie `main`.
 
-### Configuration Google API
-### Pour exécuter le script, placez votre fichier `credentials.json` (téléchargé depuis la console Google Cloud avec l'API Google Drive activée) à la racine de ce dossier. Au premier lancement, une fenêtre s'ouvrira pour vous authentifier et créer le fichier `token.json` requis pour les lancements futurs en tâche de fond.
+La clé `GEMINI_API_KEY` reste dans les secrets GitHub. Elle n'est pas dans le dépôt.

@@ -3,7 +3,7 @@
 Étape 2 — génération locale de la veille.
 
 Lit prompts/veille.md, appelle Gemini avec Google Search,
-écrit test veille.txt (JSON) et rapport-veille.md (audit).
+écrit veille.json (JSON) et rapport-veille.md (audit).
 
 La clé n'est lue que depuis la variable d'environnement GEMINI_API_KEY.
 Elle n'est jamais écrite dans un fichier du dépôt.
@@ -20,7 +20,7 @@ import sys
 from datetime import datetime
 
 PROMPT_FILE = "prompts/veille.md"
-OUTPUT_JSON = "test veille.txt"
+OUTPUT_JSON = "veille.json"
 OUTPUT_RAPPORT = "rapport-veille.md"
 DEFAULT_MODEL = "gemini-3.8-flash"
 
@@ -229,7 +229,7 @@ def main() -> None:
     except Exception as error:
         print("\n[ERREUR] Génération interrompue.")
         print(f"Détail : {error}")
-        print("test veille.txt n'a pas été réécrit.")
+        print("veille.json n'a pas été réécrit.")
         sys.exit(1)
 
 
