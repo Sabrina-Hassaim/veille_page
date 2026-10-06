@@ -81,20 +81,13 @@ def call_gemini(prompt: str) -> str:
 
     model = os.environ.get("GEMINI_MODEL", DEFAULT_MODEL)
     client = genai.Client(api_key=get_api_key())
-
-    try:
-        config = types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch(exclude_domains=["converteo.com"]))],
-            temperature=0.2,
-        )
-        response = client.models.generate_content(model=model, contents=prompt, config=config)
-    except Exception as first_error:
-        print(f"[!] Nouvel essai sans exclude_domains ({first_error}).")
-        config = types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.2,
-        )
-        response = client.models.generate_content(model=model, contents=prompt, config=config)
+    # exclude_domains n'est pas supporté par la clé Gemini Developer API.
+    # L'exclusion de Converteo reste dans le prompt.
+    config = types.GenerateContentConfig(
+        tools=[types.Tool(google_search=types.GoogleSearch())],
+        temperature=0.2,
+    )
+    response = client.models.generate_content(model=model, contents=prompt, config=config)
 
     text = getattr(response, "text", None)
     if not text:
