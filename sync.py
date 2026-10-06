@@ -276,7 +276,7 @@ def main():
     print("        WORKFLOW DE SYNCHRONISATION VEILLE TECHNIQUE      ")
     print("=========================================================\n")
 
-    input_file_path = 'test veille.txt'
+    input_file_path = 'veille.json'
     mandatory_keys = get_mandatory_keys()
 
     print(f"[+] Lecture du fichier source brut : '{input_file_path}'...")
