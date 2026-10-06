@@ -22,7 +22,7 @@ from datetime import datetime
 PROMPT_FILE = "prompts/veille.md"
 OUTPUT_JSON = "test veille.txt"
 OUTPUT_RAPPORT = "rapport-veille.md"
-DEFAULT_MODEL = "gemini-2.5-flash"
+DEFAULT_MODEL = "gemini-3.8-flash"
 
 AGENT_KEYS = [
     "titre_en",
