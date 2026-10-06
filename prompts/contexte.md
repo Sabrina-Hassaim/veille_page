@@ -4,7 +4,7 @@ Cette newsletter mensuelle est destinée à nos clients pour leur présenter les
 
 ## Schéma des Données
 
-Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par `sync.py` pour valider les données de `veille.json` avant de mettre à jour `data.json`.
+Chaque article doit posséder les clés obligatoires suivantes. Elles sont utilisées par `pipeline/sync.py` pour valider les données de `data/veille.json` avant de mettre à jour `data/data.json`.
 
 ### Clés Obligatoires
 - `titre_en` : Le titre de l'article dans sa version originale en anglais.
@@ -23,9 +23,9 @@ Chaque article doit posséder les clés obligatoires suivantes. Elles sont utili
 
 ## Pipeline
 
-1. `generate.py` lit `prompts/veille.md`, appelle Gemini avec Google Search, et écrit `veille.json`.
-2. `sync.py` reconstruit les URLs, vérifie qu'elles répondent, puis écrit `data.json` si le schéma est valide.
-3. `index.html` affiche `data.json`.
+1. `pipeline/generate.py` lit `prompts/veille.md`, appelle Gemini avec Google Search, et écrit `data/veille.json`.
+2. `pipeline/sync.py` reconstruit les URLs, vérifie qu'elles répondent, puis écrit `data/data.json` si le schéma est valide.
+3. `index.html` affiche `data/data.json`.
 4. GitHub Actions enchaîne ces étapes le 1er du mois, puis GitHub Pages publie `main`.
 
 La clé `GEMINI_API_KEY` reste dans les secrets GitHub. Elle n'est pas dans le dépôt.

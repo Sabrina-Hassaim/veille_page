@@ -3,12 +3,12 @@
 Étape 2 — génération locale de la veille.
 
 Lit prompts/veille.md, appelle Gemini avec Google Search,
-écrit veille.json (JSON) et rapport-veille.md (audit).
+écrit data/veille.json (JSON) et data/rapport-veille.md (audit).
 
 La clé n'est lue que depuis la variable d'environnement GEMINI_API_KEY.
 Elle n'est jamais écrite dans un fichier du dépôt.
 
-Ensuite : python sync.py  (reconstruction des URLs + ping HTTP).
+Ensuite : python pipeline/sync.py  (reconstruction des URLs + ping HTTP).
 """
 
 from __future__ import annotations
@@ -20,8 +20,8 @@ import sys
 from datetime import datetime
 
 PROMPT_FILE = "prompts/veille.md"
-OUTPUT_JSON = "veille.json"
-OUTPUT_RAPPORT = "rapport-veille.md"
+OUTPUT_JSON = "data/veille.json"
+OUTPUT_RAPPORT = "data/rapport-veille.md"
 DEFAULT_MODEL = "gemini-3.8-flash"
 
 AGENT_KEYS = [
@@ -225,11 +225,11 @@ def main() -> None:
         rapport = extract_rapport_part(raw)
         validate_agent_output(articles)
         save_results(articles, rapport)
-        print("[+] Ensuite : python sync.py")
+        print("[+] Ensuite : python pipeline/sync.py")
     except Exception as error:
         print("\n[ERREUR] Génération interrompue.")
         print(f"Détail : {error}")
-        print("veille.json n'a pas été réécrit.")
+        print("data/veille.json n'a pas été réécrit.")
         sys.exit(1)
 
 

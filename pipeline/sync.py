@@ -18,7 +18,7 @@ def get_mandatory_keys():
         'lien', 'date', 'impact_fr', 'impact_en', 'categorie', 'stack',
         'score_fiabilite', 'rationnel_source'
     ]
-    contexte_path = 'contexte.md'
+    contexte_path = 'prompts/contexte.md'
 
     if not os.path.exists(contexte_path):
         print(f"[!] Fichier '{contexte_path}' introuvable. Schéma par défaut appliqué.")
@@ -39,7 +39,7 @@ def get_mandatory_keys():
                     keys.append(key)
 
         if keys:
-            print(f"[DEBUG] Clés obligatoires lues depuis 'contexte.md' : {keys}")
+            print(f"[DEBUG] Clés obligatoires lues depuis '{contexte_path}' : {keys}")
             return keys
         else:
             print("[DEBUG] Aucune clé détectée dans 'contexte.md'. Clés par défaut appliquées.")
@@ -266,7 +266,7 @@ def save_data(data):
     """
     Sauvegarde le tableau final d'articles dans data.json.
     """
-    output_path = 'data.json'
+    output_path = 'data/data.json'
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
@@ -276,7 +276,7 @@ def main():
     print("        WORKFLOW DE SYNCHRONISATION VEILLE TECHNIQUE      ")
     print("=========================================================\n")
 
-    input_file_path = 'veille.json'
+    input_file_path = 'data/veille.json'
     mandatory_keys = get_mandatory_keys()
 
     print(f"[+] Lecture du fichier source brut : '{input_file_path}'...")

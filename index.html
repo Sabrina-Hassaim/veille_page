@@ -114,7 +114,7 @@
       <!-- Left: Brand Logo & Title -->
       <div class="flex items-center gap-6">
         <!-- Logo Converteo Intégré de manière officielle -->
-        <img src="Logos_RVB_Converteo.svg" alt="Logo Converteo" class="h-9 w-auto shrink-0">
+        <img src="assets/Logos_RVB_Converteo.svg" alt="Logo Converteo" class="h-9 w-auto shrink-0">
 
         <div class="border-l border-slate-200 pl-6">
           <span id="newsletter-title" class="text-xs font-bold tracking-wider text-brand-600 uppercase">Newsletter Technique</span>
@@ -428,7 +428,7 @@
 
       // Tente de charger les données dynamiques depuis data.json
       try {
-        const response = await fetch(`./data.json?v=${new Date().getTime()}`);
+        const response = await fetch(`./data/data.json?v=${new Date().getTime()}`);
         if (response.ok) {
           const freshData = await response.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
