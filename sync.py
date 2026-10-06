@@ -6,6 +6,7 @@ import sys
 import urllib.request
 import urllib.error
 import ssl
+from urllib.parse import urlparse, urlunparse
 
 def get_mandatory_keys():
     """
@@ -132,6 +133,52 @@ def check_if_url_exists(url):
     return False
 
 
+# Mots que Gemini ajoute souvent en réécrivant un slug à partir du titre,
+# et qui ne sont pas dans l'URL réelle.
+SLUG_STOPWORDS = {
+    "a", "an", "the", "on", "to", "of", "for", "and", "by",
+    "announcing", "announcement",
+}
+
+
+def candidate_urls(url):
+    """
+    Propose l'URL d'origine, puis une version nettoyée :
+    dossier de date inventé retiré, mots de remplissage retirés du slug.
+    Chaque candidate est ensuite vérifiée par HTTP avant d'être acceptée.
+    """
+    parsed = urlparse(url)
+    original_path = parsed.path.strip("/")
+    paths = [original_path]
+
+    without_date = re.sub(r"/\d{4}/\d{2}/\d{2}(?=/|$)", "", "/" + original_path).strip("/")
+    parts = without_date.split("/") if without_date else []
+    if parts:
+        tokens = [token for token in parts[-1].split("-") if token and token not in SLUG_STOPWORDS]
+        while tokens and tokens[-1].isdigit():
+            tokens.pop()
+        if tokens:
+            parts[-1] = "-".join(tokens)
+            cleaned = "/".join(parts)
+            if cleaned not in paths:
+                paths.append(cleaned)
+
+    host = parsed.netloc.lower()
+    bare = host[4:] if host.startswith("www.") else host
+    hosts = [host]
+    for variant in (bare, "www." + bare):
+        if variant not in hosts:
+            hosts.append(variant)
+
+    urls = []
+    for host_variant in hosts:
+        for path in paths:
+            candidate = urlunparse(("https", host_variant, "/" + path, "", "", ""))
+            if candidate not in urls:
+                urls.append(candidate)
+    return urls
+
+
 def rebuild_links_from_split_data(articles):
     """
     Reconstruit l'URL à partir de base_domaine et chemin_complet,
@@ -154,9 +201,19 @@ def rebuild_links_from_split_data(articles):
             url_reconstruite = f"https://{domaine_propre}/{chemin_complet}"
             
             print(f"[+] Analyse Web : Vérification de -> {url_reconstruite}")
-            
-            if check_if_url_exists(url_reconstruite):
-                item["lien"] = url_reconstruite
+
+            lien_valide = None
+            for candidate in candidate_urls(url_reconstruite):
+                if candidate != url_reconstruite:
+                    print(f"    essai du chemin corrigé -> {candidate}")
+                if check_if_url_exists(candidate):
+                    lien_valide = candidate
+                    break
+
+            if lien_valide:
+                if lien_valide != url_reconstruite:
+                    print(f"[+] Lien corrigé retenu pour : '{title_preview}'")
+                item["lien"] = lien_valide
                 # Retrait des clés temporaires de contournement de censure
                 item.pop("base_domaine", None)
                 item.pop("chemin_complet", None)
